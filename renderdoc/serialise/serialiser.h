@@ -1799,7 +1799,7 @@ public:
 
   // grab current contents of the serialiser into a new chunk
   static Chunk *Create(Serialiser<SerialiserMode::Writing> &ser, uint16_t chunkType,
-                       ChunkAllocator *allocator = NULL);
+                       ChunkAllocator *allocator = NULL, bool stealDataFromWriter = false);
 
   byte *GetData() const { return m_Data; }
   Chunk *Duplicate()
@@ -1859,10 +1859,16 @@ public:
       End();
   }
 
+  Chunk *Steal()
+  {
+    End();
+    return Chunk::Create(m_Ser, m_Idx, NULL, true);
+  }
+
   Chunk *Get(ChunkAllocator *allocator = NULL)
   {
     End();
-    return Chunk::Create(m_Ser, m_Idx, allocator);
+    return Chunk::Create(m_Ser, m_Idx, allocator, false);
   }
 
 private:

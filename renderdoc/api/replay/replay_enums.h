@@ -3854,13 +3854,13 @@ a remote server.
 
   While replaying on a remote server, the connection was lost.
 
-.. data:: ReplayOutOfMemory
+.. data:: OutOfMemory
 
-  While replaying, an out of memory error was encountered.
+  An out of memory error was encountered.
 
-.. data:: ReplayDeviceLost
+.. data:: DeviceLost
 
-  While replaying a device lost fatal error was encountered.
+  A device lost fatal error was encountered.
 
 .. data:: DataNotAvailable
 
@@ -3902,8 +3902,8 @@ enum class ResultCode : uint32_t
   AndroidAPKInstallFailed,
   AndroidAPKVerifyFailed,
   RemoteServerConnectionLost,
-  ReplayOutOfMemory,
-  ReplayDeviceLost,
+  OutOfMemory,
+  DeviceLost,
   DataNotAvailable,
   InvalidParameter,
   CompressionFailed,
