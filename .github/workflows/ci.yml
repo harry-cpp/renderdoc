@@ -346,7 +346,7 @@ jobs:
         zip -r "${FNAME}" build/bin
         ls -lh "${FNAME}"
         echo "FNAME=$FNAME" >> $GITHUB_ENV
-    - name: Upload Artifacts
+    - name: Upload Artifacts bump
       uses: actions/upload-artifact@main
       with:
         name: macOS artifacts
