@@ -346,12 +346,10 @@ jobs:
         zip -r "${FNAME}" build/bin
         ls -lh "${FNAME}"
         echo "FNAME=$FNAME" >> $GITHUB_ENV
-    - if: matrix.type == 'Release' && github.event_name == 'push'
-      name: Uploading artifacts for nightly build
-      env:
-        UPLOADLOCATION: ${{ secrets.MacUploadLocation }}
-      run: |
-        echo '|1|if7jyhkGD/xNbs/bfYSZ4zcgIoo=|gjhyr71exVKt7rNtMly68VccvLk= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPhCdt25vFMUQ63wTBxKLCZY1Ax+F9Y+SSusjuG6b4xtdVQ1lo3FqHnyLtsvYja0R0RiwTEob6TDrr/j7rjR96M=' >> $HOME/.ssh/known_hosts
-        ls -lR $HOME/.ssh
-        cat $HOME/.ssh/known_hosts
-        if [ ! -z "${UPLOADLOCATION}" ]; then lftp sftp://"${UPLOADLOCATION}" -e "cd upload; put ${FNAME}; bye"; fi
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@main
+      with:
+        name: macOS artifacts
+        path: |
+          build/
+        if-no-files-found: error
